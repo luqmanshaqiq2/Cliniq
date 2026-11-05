@@ -1,0 +1,43 @@
+Records can be a good choice when you want value-based equality or immutable data, especially for response DTOs. But request DTOs are commonly mutable for JSON binding and validation, and switching to records doesn’t make the API more correct or faster by itself.
+
+
+AppDbContextFactory is responsible for creating an instance of AppDbContext, usually for Entity Framework Core design-time operations.EF Core how to create that DbContext, even without running your application and understand entity and database configuration.
+EF Core can create a DbContext in several ways:
+1. From your application’s Dependency Injection (DI) — it uses the configuration in Program.cs.
+2. Through AppDbContextFactory — it uses the factory's CreateDbContext() method.
+Why use a factory, then?
+Suppose your Program.cs contains:
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+
+EF Core can often use this configuration to create your context for migrations. No factory needed.
+
+But if EF Core cannot construct your context reliably at design time, a factory provides an explicit way to create it.
+
+
+
+ExceptionInterceptor under detects and logs errors when EF Core fails to save changes to the database, whether the save is synchronous or asynchronous.
+
+		API Request					          LinqHelpers.cs
+    filterOn=Price&filterQuery=>100		→	Identifies Price as an integer and builds the condition		→	x => x.Price > 100	→		EF Core
+																			Translates the expression into SQL and 																			     retrieves matching books
+
+
+ExecuteSqlString with a plain string is the risky one for SQL injection. Prefer FromSqlInterpolated or parameters.
+
+
+Repository pattern: BaseRepo<T> can own shared CRUD operations, while entity-specific repositories add reusable queries that match the domain (for example, finding schedule conflicts or calculating an invoice balance). Keep business workflows out of repositories unless they are specifically data-access concerns.
+
+Database integrity must be enforced by the database when it needs to hold for every writer, not only checked in application code. A repository conflict check is useful feedback, but two requests can both pass it before either saves. A database constraint or trigger is the last line of defense against that race.
+
+Time intervals overlap when start1 < end2 AND start2 < end1. Using strict comparisons means back-to-back appointments are allowed. Cancelled appointments should not block a time slot, so the status rule belongs in both the conflict query and the database trigger.
+
+SQLite stores EF Core decimal values as TEXT by default. Numeric CHECK constraints should CAST the value to NUMERIC before comparing it, so zero or negative amounts cannot pass because of SQLite's type comparison rules.
+
+Invoice balances need to account for partial payments: sum only completed payments, subtract that total from the invoice amount, and avoid returning a negative outstanding balance. A missing invoice is different from a zero balance.
+
+EF Core migrations version database schema changes. Model configuration describes the intended schema, the migration applies the change to existing databases, and the model snapshot lets EF detect future differences. Database-specific objects such as SQLite triggers may need explicit SQL in a migration.
+
+

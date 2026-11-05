@@ -1,0 +1,26 @@
+@Cliniq.API_HostAddress = http://localhost:5050
+
+# Register once; public registration always creates a Patient account.
+POST {{Cliniq.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Example Patient",
+  "email": "patient@example.test",
+  "password": "replace-with-a-long-password"
+}
+
+###
+# @name login
+POST {{Cliniq.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "patient@example.test",
+  "password": "replace-with-a-long-password"
+}
+
+###
+GET {{Cliniq.API_HostAddress}}/api/doctors
+Authorization: Bearer {{login.response.body.accessToken}}
+Accept: application/json

@@ -1,0 +1,7 @@
+Added database-focused logic to the repositories where it matters:
+
+AppointmentRepo checks schedule conflicts and queries a doctor’s appointments in a time range. Database triggers reject overlapping active appointments for the same doctor or patient; cancelled appointments don’t block scheduling.
+AvailabilitySlotRepo queries available slots overlapping a requested period.
+InvoiceRepo calculates outstanding balances across completed partial payments.
+PaymentRepo looks up payments by transaction reference and lists an invoice’s payments.
+Database checks reject invalid appointment/slot time ranges and non-positive invoice/payment amounts, including SQLite’s text-backed decimal handling.

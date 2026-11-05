@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Cliniq.API/Cliniq.API.csproj" />
+  <Project Path="Cliniq.DataAccess/Cliniq.DataAccess.csproj" />
+  <Project Path="Cliniq.Models/Cliniq.Models.csproj" />
+  <Project Path="Cliniq.Services/Cliniq.Services.csproj" />
+</Solution>

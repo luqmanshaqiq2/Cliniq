@@ -1,0 +1,12 @@
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+node_modules/
+dist/
+.env
+.env.*

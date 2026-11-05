@@ -1,0 +1,17 @@
+global using Backend.Cliniq.Models.Entities;
+global using Backend.Cliniq.Models.Entities.Base;
+global using Cliniq.Models.DTO.Appointment;
+global using Backend.Cliniq.Models.DTO.AvailabilitySlot;
+global using Backend.Cliniq.Models.DTO.Doctor;
+global using Backend.Cliniq.Models.DTO.Invoice;
+global using Backend.Cliniq.Models.DTO.MedicalRecord;
+global using Backend.Cliniq.Models.DTO.Patient;
+global using Backend.Cliniq.Models.DTO.Payment;
+global using Backend.Cliniq.Models.DTO.User;
+global using Cliniq.API.Contracts;
+global using Cliniq.API.Exceptions;
+global using Cliniq.Services.DataServices.Base;
+global using Cliniq.Services.DataServices.Contracts;
+global using Cliniq.Services.DataServices.Interfaces;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
