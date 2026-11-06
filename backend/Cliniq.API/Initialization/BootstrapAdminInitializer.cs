@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cliniq.API.Initialization;
 
-public static class BootstrapAdminInitializer
+public static class BootstrapAdminInitializer //automatic admin account in db
 {
     public static async Task InitializeAsync(
         IServiceProvider services,
