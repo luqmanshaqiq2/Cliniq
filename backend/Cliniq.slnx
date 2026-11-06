@@ -3,4 +3,5 @@
   <Project Path="Cliniq.DataAccess/Cliniq.DataAccess.csproj" />
   <Project Path="Cliniq.Models/Cliniq.Models.csproj" />
   <Project Path="Cliniq.Services/Cliniq.Services.csproj" />
+  <Project Path="Test/Cliniq.API.Tests.csproj" />
 </Solution>
