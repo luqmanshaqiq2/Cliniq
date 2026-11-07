@@ -1,2 +1,0 @@
-1. check login and register
-2. 
