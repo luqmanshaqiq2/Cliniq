@@ -40,4 +40,24 @@ Invoice balances need to account for partial payments: sum only completed paymen
 
 EF Core migrations version database schema changes. Model configuration describes the intended schema, the migration applies the change to existing databases, and the model snapshot lets EF detect future differences. Database-specific objects such as SQLite triggers may need explicit SQL in a migration.
 
+API contracts should validate at the edge. Data annotations like [Required], [EmailAddress], [StringLength], and [Range] catch bad requests early, but domain rules still belong in services and database constraints. A strong API design validates both the request shape and the business meaning.
+
+JWT authentication works best when the token contains only the minimum claims needed for authorization, and the signing key is long enough and kept secret. In practice, the server should validate issuer, audience, expiration, and signature on every request, and the client should only receive the token after successful login.
+
+Middleware is useful for cross-cutting concerns like exception handling, rate limiting, and request logging. Handling exceptions centrally keeps controllers cleaner and makes the API responses consistent, especially when you want to hide internal details while still returning actionable client errors.
+
+Rate limiting protects public endpoints from brute-force or abuse, but it is only effective when the key is based on a meaningful client identifier, such as IP address, and the limit is tuned to realistic usage. The API should return a clear Retry-After header so clients know when to retry.
+
+Names and routes should be predictable. For example, controller actions like /api/auth/login and /api/doctors/available communicate purpose clearly, and consistent route naming improves both client code and maintainability.
+
+A well-structured service layer keeps controllers thin. Controllers should translate HTTP concerns into domain operations, while services handle business rules like slot generation, appointment booking, duplicate detection, and patient anonymization.
+
+Testing with WebApplicationFactory is valuable for integration testing ASP.NET Core apps because it boots the real application pipeline in a test host. This lets us verify routing, model binding, authorization, serialization, and app-level behavior without mocking everything away.
+
+Database constraints and transaction boundaries matter. Even if the application checks for conflicts before creating a record, a second request may race in between. Transactions and database-level validation help avoid inconsistent states.
+
+Documenting what you learn matters because patterns become easier to reuse later. Good learning notes capture why a design exists, not just what it is: e.g., why records are useful, why EF Core factories exist, why constraints matter, and how JWT and validation protect the API.
+
+The best API code usually balances three things: correctness, security, and simplicity. Simple code is easy to maintain, correct code avoids bad data, and secure code limits exposure to common attack patterns such as injection, overexposure of secrets, and invalid authorization.
+
 
