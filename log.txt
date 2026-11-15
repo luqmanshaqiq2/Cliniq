@@ -1,0 +1,54 @@
+However, restructure the application around **Role-Based Access Control (RBAC)**. The system has two distinct portals: **Doctor Portal** and **Receptionist Portal**. Each role must have its own navigation, dashboard, and permitted features.
+
+### 1. Doctor Portal
+All doctor-related and administrative medical operations must be accessible exclusively through the Doctor Portal.
+
+- Dashboard
+- Patient Management
+- Medical Records
+- Appointments
+- Prescriptions
+- Billing and Payments
+- Profile
+The Doctor Portal should contain the existing in-depth medical management functionality. Do not expose these administrative and clinical management features to receptionists.
+
+### 2. Receptionist Portal
+The Receptionist Portal should have a simplified, operational interface focused on front-desk activities.
+
+**Overview Dashboard**
+
+Include the following elements:
+
+- **Start Shift:** Allow the receptionist to start their working shift.
+- **Estimated End Time:** Display the expected shift completion time based on the shift start time and configured working hours.
+- **Enroll Patient:** A prominent action to register a new patient.
+- **Current Patient Queue:** Display the current number of patients waiting for consultation.
+- **Create Appointment:** A quick-action button for creating appointments.
+**Receptionist Navigation**
+
+- Overview
+- Enroll Patient
+- Appointments
+- Medical Records
+- Billing
+- Profile
+Remove **Team Access** entirely from the Receptionist Portal.
+
+### 3. Access Control Requirements
+
+- Doctor and Receptionist must have separate portal experiences.
+- Navigation items must be determined by the authenticated user's role.
+- Receptionists must not be able to access doctor-only administrative or clinical management features.
+- Doctors retain access to the full medical management functionality.
+- Do not simply hide unauthorized navigation items; enforce role-based authorization at the route and backend API levels as well.
+
+### 4. Design Requirements
+
+- Preserve the current visual design and styling.
+- Maintain a consistent design system across both portals.
+- Keep the Receptionist Portal minimal, clean, and task-oriented.
+- Avoid unnecessary UI elements, excessive descriptions, or decorative components.
+- Ensure each dashboard prioritizes the actions relevant to its respective role.
+**Important:** This is a restructuring of the existing application, not a request to redesign it from scratch. Reuse the existing components and styling wherever possible.
+
+But before all that consider a  Sign In page(only sign in no registration, the system admin aka the doctor can do it directly in database if he wants which does not related to here so no sign up/registration)

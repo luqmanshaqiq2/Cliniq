@@ -63,7 +63,7 @@ export default function DashboardPage({ onNavigate }) {
 
         <section className="panel week-panel">
           <SectionHeading title="Your week" detail="May 20 – 26, 2024" />
-          <div className="week-strip">{/x/zxk/
+          <div className="week-strip">{
           ((day) => <div className={`week-day ${day.active ? 'selected' : ''}`} key={day.day}><span>{day.day}</span><strong>{day.date}</strong><i>{day.count}</i></div>)}</div>
           <div className="week-summary"><div className="summary-icon"><Icon name="calendar" size={18} /></div><div><strong>57 appointments</strong><span>Scheduled this week</span></div><div className="summary-trend">+6%</div></div>
           <div className="week-progress"><span /></div>
